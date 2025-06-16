@@ -1,13 +1,19 @@
-import 'package:bloc_app/features/home/bloc/home_bloc.dart';
+import 'package:bloc_app/features/cart/bloc/cart_bloc.dart';
 import 'package:bloc_app/features/home/models/home_plants_data_model.dart';
 import 'package:flutter/material.dart';
 
-class ProductTileWidget extends StatelessWidget {
+class CartTileWidget extends StatelessWidget {
   final HomePlantsDataModel homePlantsDataModel;
-  final HomeBloc homeBloc;
+  final CartBloc cartBloc;
   final bool isWishlisted;
   final bool isCarted;
-  const ProductTileWidget({super.key, required this.homePlantsDataModel, required this.homeBloc, required this.isWishlisted, required this.isCarted});
+  const CartTileWidget({
+    super.key,
+    required this.homePlantsDataModel,
+    required this.cartBloc,
+    required this.isWishlisted,
+    required this.isCarted,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -52,27 +58,12 @@ class ProductTileWidget extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      homeBloc.add(
-                        HomeWishlistClickedEvent(
-                          clickedProduct: homePlantsDataModel,
-                        ),
-                      );
+                      cartBloc.add(CartRemoveFromCartEvent(removeItem: homePlantsDataModel));
                     },
                     icon: Icon(
-                      isWishlisted ? Icons.favorite : Icons.favorite_border_sharp,
-                      color: isWishlisted ? Colors.red : Colors.black,
+                          Icons.shopping_cart,
+    color: Colors.green,
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      homeBloc.add(
-                        HomeCartClickedEvent(
-                          clickedProduct: homePlantsDataModel,
-                        ),
-                      );
-                    },
-                    icon: Icon(isCarted?Icons.shopping_cart:Icons.shopping_cart_outlined,
-                    color: isCarted?Colors.green:Colors.black,),
                   ),
                 ],
               ),

@@ -9,6 +9,14 @@ class HomeWishlistNavigateClickedEvent extends HomeEvent {}
 
 class HomeCartNavigateClickedEvent extends HomeEvent {}
 
-class HomeWishlistClickedEvent extends HomeEvent {}
+class HomeWishlistClickedEvent extends HomeEvent {
+  final HomePlantsDataModel clickedProduct;
 
-class HomeCartClickedEvent extends HomeEvent {}
+  HomeWishlistClickedEvent({required this.clickedProduct});
+}
+
+class HomeCartClickedEvent extends HomeEvent {
+  final HomePlantsDataModel clickedProduct;
+
+  HomeCartClickedEvent({required this.clickedProduct});
+}

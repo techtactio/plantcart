@@ -20,6 +20,8 @@ class _HomeState extends State<Home> {
   }
 
   final HomeBloc homebloc = HomeBloc();
+  Set<int> wishlistedIds = {};
+  Set<int> cartedIds = {};
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
@@ -37,13 +39,17 @@ class _HomeState extends State<Home> {
             context,
             MaterialPageRoute(builder: (context) => Cart()),
           );
+        } else if (state is HomeWishlistclickedState) {
+          wishlistedIds.add(state.clickedProduct.id);
+        } else if (state is HomeCartclickedState) {
+          cartedIds.add(state.clickedProduct.id);
         }
       },
       builder: (context, state) {
         switch (state.runtimeType) {
-          case HomeLoadingState:
+          case const (HomeLoadingState):
             return Scaffold(body: Center(child: CircularProgressIndicator()));
-          case HomeLoadedsuccessState:
+          case const (HomeLoadedsuccessState):
             final successState = state as HomeLoadedsuccessState;
             return Scaffold(
               appBar: AppBar(
@@ -68,12 +74,19 @@ class _HomeState extends State<Home> {
                 itemCount: successState.products.length,
                 itemBuilder: (context, index) {
                   return ProductTileWidget(
+                    homeBloc: homebloc,
                     homePlantsDataModel: successState.products[index],
+                    isWishlisted: successState.wishlistedIds.contains(
+                      successState.products[index].id,
+                    ),
+                    isCarted: successState.cartedIds.contains(
+                      successState.products[index].id,
+                    ),
                   );
                 },
               ),
             );
-          case HomeErrorState:
+          case const (HomeErrorState):
             return Scaffold(body: Center(child: Text("Error")));
           default:
             return SizedBox();
