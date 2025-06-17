@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:bloc_app/data/cart_items.dart';
 import 'package:bloc_app/data/plant_data.dart';
+import 'package:bloc_app/data/wishlist_items.dart';
 import 'package:bloc_app/features/home/models/home_plants_data_model.dart';
 import 'package:meta/meta.dart';
 part 'home_event.dart';
@@ -66,8 +67,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     final id = event.clickedProduct.id;
     if (wishlistedIds.contains(id)) {
       wishlistedIds.remove(id);
+      wishlistItems.remove(event.clickedProduct);
     } else {
       wishlistedIds.add(id);
+      wishlistItems.add(event.clickedProduct);
     }
 
     emit(

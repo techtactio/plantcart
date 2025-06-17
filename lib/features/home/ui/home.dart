@@ -32,12 +32,12 @@ class _HomeState extends State<Home> {
         if (state is HomeNavigateToWishlistState) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Wishlist()),
+            MaterialPageRoute(builder: (context) => Wishlist(homeBloc: homebloc,)),
           );
         } else if (state is HomeNavigateToCartState) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Cart()),
+            MaterialPageRoute(builder: (context) => Cart(homeBloc: homebloc,)),
           );
         } else if (state is HomeWishlistclickedState) {
           wishlistedIds.add(state.clickedProduct.id);

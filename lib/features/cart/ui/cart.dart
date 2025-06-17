@@ -1,10 +1,12 @@
 import 'package:bloc_app/features/cart/bloc/cart_bloc.dart';
 import 'package:bloc_app/features/cart/ui/cart_tile_widget.dart';
+import 'package:bloc_app/features/home/bloc/home_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Cart extends StatefulWidget {
-  const Cart({super.key});
+  final HomeBloc homeBloc;
+  const Cart({super.key, required this.homeBloc});
 
   @override
   State<Cart> createState() => _CartState();
@@ -38,6 +40,7 @@ class _CartState extends State<Cart> {
                 itemCount: successState.cartItems.length,
                 itemBuilder: (context, index) {
                   return CartTileWidget(
+                    homeBloc: widget.homeBloc,
                     cartBloc: cartBloc,
                     homePlantsDataModel: successState.cartItems[index],
                     isWishlisted: false,

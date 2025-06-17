@@ -1,18 +1,18 @@
-import 'package:bloc_app/features/cart/bloc/cart_bloc.dart';
 import 'package:bloc_app/features/home/bloc/home_bloc.dart';
 import 'package:bloc_app/features/home/models/home_plants_data_model.dart';
+import 'package:bloc_app/features/wishlist/bloc/wishlist_bloc.dart';
 import 'package:flutter/material.dart';
 
-class CartTileWidget extends StatelessWidget {
+class WishlistTileWidget extends StatelessWidget {
   final HomePlantsDataModel homePlantsDataModel;
   final HomeBloc homeBloc;
-  final CartBloc cartBloc;
+  final WishlistBloc wishlistBloc;
   final bool isWishlisted;
   final bool isCarted;
-  const CartTileWidget({
+  const WishlistTileWidget({
     super.key,
     required this.homePlantsDataModel,
-    required this.cartBloc,
+    required this.wishlistBloc,
     required this.isWishlisted,
     required this.isCarted,
     required this.homeBloc,
@@ -61,14 +61,14 @@ class CartTileWidget extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () {
-                      cartBloc.add(
-                        CartRemoveFromCartEvent(
+                      wishlistBloc.add(
+                        WishlistRemoveFromeWishlistEvent(
                           removeItem: homePlantsDataModel,
                         ),
                       );
-                      homeBloc.add(HomeCartClickedEvent(clickedProduct: homePlantsDataModel));
+                      homeBloc.add(HomeWishlistClickedEvent(clickedProduct: homePlantsDataModel));
                     },
-                    icon: Icon(Icons.shopping_cart, color: Colors.green),
+                    icon: Icon(Icons.favorite, color: Colors.red),
                   ),
                 ],
               ),
