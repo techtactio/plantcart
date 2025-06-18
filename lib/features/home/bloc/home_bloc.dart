@@ -24,8 +24,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeInitialEvent event,
     Emitter<HomeState> emit,
   ) async {
-    emit(HomeLoadingState());
-    await Future.delayed(Duration(seconds: 2));
     products = PlantData.plants
         .map(
           (e) => HomePlantsDataModel(

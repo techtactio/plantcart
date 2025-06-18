@@ -7,7 +7,6 @@ sealed class HomeActionState extends HomeState {}
 
 final class HomeInitial extends HomeState {}
 
-class HomeLoadingState extends HomeState {}
 
 class HomeLoadedsuccessState extends HomeState {
   final List<HomePlantsDataModel> products;
